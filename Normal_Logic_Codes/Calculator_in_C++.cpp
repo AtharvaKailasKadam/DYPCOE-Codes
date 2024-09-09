@@ -38,6 +38,7 @@ int main()
 	char op;
 	
 	cout<<"Enter the Operation to be Performed '+','-','*','/'";
+	cin>>op;
 	
 	switch(op)
 	{
