@@ -51,3 +51,4 @@ average=sum/n
 print(average)
 
 print("The Code Executed Successfully....!")
+print("")
