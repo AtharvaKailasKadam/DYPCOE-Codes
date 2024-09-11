@@ -1,5 +1,6 @@
 # Logic to Find the Calculations on the List
 # Just to Understand the Logic for the Following Operations
+
 List1=[]
 n=int(input("Enter the Number of Values to be Entered in the List : "))
 print("The Total number of Elements in the List will be : ")
