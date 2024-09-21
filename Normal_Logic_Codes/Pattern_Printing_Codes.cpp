@@ -1,4 +1,4 @@
-// Write a Program to print the Pattern 
+// Write a Program to print the Pattern
 // 1111111
 // 222222
 // 33333
