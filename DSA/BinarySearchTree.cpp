@@ -1,72 +1,158 @@
 #include<iostream>
 using namespace std;
-
-struct Node{
+struct Node
+{
 	int data;
 	Node *left;
 	Node *right;
 };
 
-class BST{
-public:
-	Node *root;
-	BST(){
-		root = NULL;		
-	}
-	
-	void create(int data){
-		Node *newNode = new Node();
-		if(root==NULL){
-			newNode->data = data;
-			newNode->left = NULL;
-			newNode->right = NULL;
-			root=newNode;
-		}
-	}
-	
-	void insert(int data, Node *root){
-		Node *insertNode = new Node();
-		if(root==NULL){
-			create(data);
-		}else{
-		if(root->data<data){
-			if(root->right==NULL){
-				root->right=insertNode;
-			}else{
-				insert(data,root->right);
-			}
-		}
-		else(root->data>data){
-			if(root->left==NULL){
-				root->left=insertNode;
-			}else{
-				insert(data,root->left);
-			}
-		}}
-	}
-	
-	void display(Node *root){
-		Node *displayNode = new Node();
-		if(root!=NULL){
-			cout<<"Root Node: "<<root->data<<endl;
-		}
-		if(root->left!=NULL){
-			displayNode=root->left;
-			cout<<"Root Left: "<<displayNode->data<<endl;
-		}
-		if(root->right!=NULL){
-			displayNode=root->right;
-			cout<<"Root Right: "<<displayNode->data<<endl;
-		}
-	}
-	
-	
-};
 
-int main(){
-	BST bt;
-	bt.create(25);
-	bt.insert(15, bt.root);
-	bt.insert(35, bt.root);
-	bt.display(bt.root);
+Node* InsertNode(Node* root, int no)
+{
+	if(root==NULL)
+	{
+		Node* newNode=new Node();
+		newNode->data=no;
+		newNode->left=NULL;
+		newNode->right=NULL;
+		return newNode;
+	}
+	if(no<root->data)
+		root->left=InsertNode(root->left,no);
+	else
+		root->right=InsertNode(root->right,no);
+		return root;
+
+}
+void search(Node* root, int no)
+{
+	if(root==NULL)
+	{
+		cout<<"The BST is Empty : ";
+		cout<<"No Element/Node Found : ";
+	}
+	else
+		if(root->data==no)
+		{
+			cout<<"Element Found";
+		}
+		else if(no < root->data)
+		{
+			search(root->left, no);
+		}
+		else
+		{
+			search(root->right,no);
+		}
+}
+
+LongestPathLength(Node* root)
+{
+	if(root==NULL)
+	{
+		cout<<"The BST is Empty : ";
+	}
+	else
+	{
+		int left=LongestPathLength(root->left);
+		int right=LongestPathLength(root->right);
+		if(left<right)
+		{
+			return right+1;
+		}
+		else
+		{
+			return left+1;
+		}
+	}
+}
+
+void SwapTree(Node* root)
+{
+	if(root==NULL)
+	{
+		cout<<"The BST is Empty : ";
+	}
+	else
+	SwapTree(root->left);
+	SwapTree(root->right);
+	Node* temp=root->left;
+	root->left=root->right;
+	root->right=temp;
+}
+
+void FindMin(Node* root)
+{
+	if(root==NULL)
+	{
+		cout<<"The BST is Empty : ";
+	}
+	else if(root->left==NULL)
+	{
+		cout<<"The Minimum is  : "<<root->data<<endl;
+	}
+	else 
+	{
+		FindMin(root->left);
+	}
+}
+void Inorder(Node* root)
+{
+	if(root==NULL)
+	{
+		return;
+	}
+	Inorder(root->right);
+	cout<<root->data<<"";
+	Inorder(root->left);
+}
+
+int main()
+{
+	Node* root=NULL;
+	int no;
+	int choice;
+	while(true)
+	{
+		cout<<"Enter the Choice : ";
+		cout<<"1. Insert Node : "<<endl;
+		cout<<"2. Search Node : "<<endl;
+		cout<<"3. Longest Path Length : "<<endl;
+		cout<<"4. Swap Tree : "<<endl;
+		cout<<"5. Find Minimum : "<<endl;
+		cout<<"6. Inorder Traversal : "<<endl;
+		cout<<"7. Exit : "<<endl;
+		cin>>choice;
+		switch(choice)
+		{
+			case 1:
+				cout<<"Enter the Element to be Inserted : ";
+				cin>>no;
+				root=InsertNode(root,no);
+				break;
+			case 2:
+				cout<<"Enter the Element to be Searched : ";
+				cin>>no;
+				search(root,no);
+				break;
+			case 3:
+				LongestPathLength(root);
+				break;
+			case 4:
+				SwapTree(root);
+				break;
+			case 5:
+				FindMin(root);
+				break;
+			case 6:
+				Inorder(root);
+				break;
+			case 7:
+				exit(0);
+			default:
+				cout<<"Invalid Choice : ";
+		}
+	}
+	return 0;
 }
