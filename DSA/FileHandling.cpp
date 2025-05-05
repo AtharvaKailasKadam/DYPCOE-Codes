@@ -31,11 +31,11 @@ class FileHandling
         cin>>Rollno;
         cout<<"Enter the  Name:";
         cin>>Name;
-        cout>>"Enter the Phone Number:";
-        cin<<Phone;
-        cout>>"Enter the Address:";
-        cin<<Address;
-        f<<Rollno<<Name<<Phone<<Adress<<endl
+        cout<<"Enter the Phone Number:";
+        cin>>Phone;
+        cout<<"Enter the Address:";
+        cin>>Address;
+        f<<Rollno<<Name<<Phone<<Address<<endl;
         f.close();
         return 0;
     }
@@ -50,10 +50,10 @@ class FileHandling
         cin>>Roll;
         while(!f.eof())
         {
-            f>>RollNo>>Name>>Phone>>Address;
+            f>>Rollno>>Name>>Phone>>Address;
             if(Rollno==Roll)
             {
-                f1<<RollNo<<Name<<Phone<<Address<<endl;
+                f1<<Rollno<<Name<<Phone<<Address<<endl;
             }
         }
         remove("Student.txt");
@@ -67,9 +67,9 @@ class FileHandling
         fstream f;
         f.open("Student.txt",ios::in);
         cout<<"Roll Number / Name / Phone Number / Address"<<endl;
-        while(!f.e0f())
+        while(!f.eof())
         {
-            f>>RollNo>>Name>>Phone>>Address:
+            f>>RollNo>>Name>>Phone>>Address;
             cout<<RollNo<<"/"<<Name<<"/"<<Phone<<"/"<<Address<<endl;
         }
         f.close();
@@ -81,7 +81,7 @@ int main()
 {
     FileHandling f;
     int choice;
-    while (True)
+    while (true):
     {
         cout<<"1. Add Data"<<endl;
         cout<<"2. Remove Data"<<endl;
@@ -110,5 +110,5 @@ int main()
         {
             cout<<"Invalid choice, please try again."<<endl;
         }
-    
+    }
 }
