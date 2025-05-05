@@ -1,114 +1,109 @@
-#include<iostream>
-#include<fstream>
+#include <iostream>
+#include <fstream>
 using namespace std;
-class FileHandling
-{ 
-    int Rollno;
-    string Name, Phone, Address;
+class Student
+{
+    int rollno;
+    string name, Div, address;
 
-    public:
-    void adddata()
+public:
+    int add()
     {
         fstream f;
-        f.open("Student.txt",ios::in);
-        cout<<"Enter the Roll Number:"
-        cin>>Rollno;
+        f.open("test.txt", ios::in);
+        cout << "Enter roll no:";
+        cin >> rollno;
         int roll;
-
-        while(!f.eof())
+ while (!f.eof())
         {
-            f>>Roll>>Name>>Phone>>Address;
-            if(Rollno==roll)
+            f >> roll >> name >> Div >> address;
+            if (rollno == roll)
             {
-                cout<<"Roll Number already exists"<<endl;
-                break;
+                cout<<"Roll already exist";
+                return -1;
             }
-        }
+        }     
         f.close();
-
-        f.open("Student.txt"ios::app);
-        cout<<"Enter the Roll Number:";
-        cin>>Rollno;
-        cout<<"Enter the  Name:";
-        cin>>Name;
-        cout<<"Enter the Phone Number:";
-        cin>>Phone;
-        cout<<"Enter the Address:";
-        cin>>Address;
-        f<<Rollno<<Name<<Phone<<Address<<endl;
+                f.open("test.txt", ios::app);
+        cout << "Enter name:";
+        cin >> name;
+        cout << "Enter div:";
+        cin >> Div;
+        cout << "Enter address";
+        cin >> address;
+        f << rollno<<" "<< name<<" " << Div<<" " << address<<endl;
         f.close();
         return 0;
     }
-
-    void RemoveData()
+    void Remove()
     {
-        fstream f,f1;
-        f.open("Student.txt",ios::in);
-        f1.open("temp.txt",ios::app);
-        int Roll;
-        cout<<"Enter the Roll Number to be Deleted:";
-        cin>>Roll;
-        while(!f.eof())
+
+        fstream f, f1;
+
+        f.open("test.txt", ios::in);
+        f1.open("temp.txt", ios::app);
+        int roll;
+        cout << "Enter rollno:";
+        cin >> roll;
+        while (!f.eof())
         {
-            f>>Rollno>>Name>>Phone>>Address;
-            if(Rollno==Roll)
+            f >> rollno >> name >> Div >> address;
+            if (rollno != roll)
             {
-                f1<<Rollno<<Name<<Phone<<Address<<endl;
+                f1 << rollno << name << Div << address;
             }
         }
-        remove("Student.txt");
-        rename("temp.txt","Student.txt");
-        cout<<"Record Deleted Successfully"<<endl;
+        remove("test.txt");
+        rename("temp.txt", "test.txt");
+        f1.close();
         f.close();
     }
-
-    void DisplayData()
+    void display()
     {
         fstream f;
-        f.open("Student.txt",ios::in);
-        cout<<"Roll Number / Name / Phone Number / Address"<<endl;
-        while(!f.eof())
+
+        f.open("test.txt", ios::in);
+        while (!f.eof())
         {
-            f>>RollNo>>Name>>Phone>>Address;
-            cout<<RollNo<<"/"<<Name<<"/"<<Phone<<"/"<<Address<<endl;
+            f >> rollno >> name >> Div >> address;
+            cout << "Roll no:" << rollno<<endl;
+            cout << "Name:" << name<<endl;
+            cout << "Div:" << Div<<endl;
+            cout << "Address:" << address<<endl;
         }
         f.close();
-
     }
+  
 };
+
 
 int main()
 {
-    FileHandling f;
-    int choice;
-    while (true):
+
+    Student s;
+    int ch;
+    while (true)
     {
-        cout<<"1. Add Data"<<endl;
-        cout<<"2. Remove Data"<<endl;
-        cout<<"3. Display Data"<<endl;
-        cout<<"4. Exit"<<endl;
-        cout<<"Enter your choice:";
-        cin>>choice;
-        
-        if(choice==1)
+        cout << "1.Add\n2.Remove\n3.Display \n any other key for exit";
+        cout << "\nEnter your choice";
+        cin >> ch;
+        if (ch == 1)
         {
-            f.adddata();
+            s.add();
         }
-        else if(choice==2)
+        else if (ch == 2)
         {
-            f.RemoveData();
+            s.Remove();
         }
-        else if(choice==3)
+        else if (ch == 3)
         {
-            f.DisplayData();
-        }
-        else if(choice==4)
-        {
-            break;
+            s.display();
         }
         else
         {
-            cout<<"Invalid choice, please try again."<<endl;
+            break;
         }
     }
+
+    return 0;
 }
