@@ -52,12 +52,12 @@ int main()
 
     for(int i = 0; i < n; i++)
     {
-    cout << ArrivalTime[i] << "|"
-        << BurstTime[i] << "|"
-        << CompletionTime[i] << "|"
-        << TurnAroundTime[i] << "|"
-        << WaitingTime[i] << endl;
+    cout << ArrivalTime[i] << "\t|\t"
+        << BurstTime[i] << "\t|\t"
+        << CompletionTime[i] << "\t|\t"
+        << TurnAroundTime[i] << "\t|\t"
+        << WaitingTime[i] << "\t|\t"
+        << endl;
     }
-
     return 0;
 }
