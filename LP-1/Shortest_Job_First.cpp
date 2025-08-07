@@ -1,63 +1,106 @@
-#include<iostream>
+#include <iostream>
+#include <algorithm>
+#include <iomanip>
+
 using namespace std;
 
 int main()
 {
     int n;
-    cout << "Enter the Number of Values you want to Pass:";
+    cout << "Enter the number of processes: ";
     cin >> n;
 
-    int ArrivalTime[n];
-    int BurstTime[n];
-    int CompletionTime[n];
-    int TurnAroundTime[n];
-    int WaitingTime[n];
+    int pid[n];
+    int at[n];
+    int bt[n];
+    int ct[n];
+    int tat[n];
+    int wt[n];
+    bool completed[n];
 
-    cout << "Enter Arrival Time and the Burst Time:\n";
-
-    for(int i = 0; i < n; i++)
+    cout << "Enter Arrival Time and Burst Time for each process:\n";
+    for (int i = 0; i < n; ++i)
     {
-        cout << "Enter Arrival Time:";
-        cin >> ArrivalTime[i];
-        cout << "Enter the Burst Time:";
-        cin >> BurstTime[i];
+        pid[i] = i + 1;
+        cout << "Process " << i + 1 << " Arrival Time: ";
+        cin >> at[i];
+        cout << "Process " << i + 1 << " Burst Time: ";
+        cin >> bt[i];
+        completed[i] = false;
     }
 
-    cout << "Arrival Time|Burst Time\n";
-
-    for(int i = 0; i < n; i++)
+    for (int i = 0; i < n - 1; ++i)
     {
-        cout << ArrivalTime[i] << "|" << BurstTime[i] << endl;
-    }
-
-    int CurrentTime = 0;
-
-    for(int i = 0; i < n; i++)
-    {
-        if(CurrentTime < ArrivalTime[i])
+        for (int j = 0; j < n - i - 1; ++j)
         {
-            CurrentTime = ArrivalTime[i];
+            if (at[j] > at[j + 1]) {
+                swap(at[j], at[j + 1]);
+                swap(bt[j], bt[j + 1]);
+                swap(pid[j], pid[j + 1]);
+            }
         }
-        CurrentTime = CurrentTime + BurstTime[i];
-        CompletionTime[i] = CurrentTime;
     }
 
-    for(int i = 0; i < n; i++)
+    int currentTime = 0;
+    int completedCount = 0;
+
+    while (completedCount < n)
     {
-    TurnAroundTime[i] = CompletionTime[i] - ArrivalTime[i];
-    WaitingTime[i] = TurnAroundTime[i] - BurstTime[i];
+        int shortestJobIndex = -1;
+        int shortestBurst = -1;
+
+        for (int i = 0; i < n; ++i)
+        {
+            if (!completed[i] && at[i] <= currentTime)
+            {
+                if (shortestJobIndex == -1 || bt[i] < shortestBurst)
+                {
+                    shortestBurst = bt[i];
+                    shortestJobIndex = i;
+                }
+            }
+        }
+
+        if (shortestJobIndex == -1)
+        {
+            int nextArrivalTime = -1;
+            for(int i=0; i<n; ++i)
+            {
+                if(!completed[i])
+                {
+                    if(nextArrivalTime == -1 || at[i] < nextArrivalTime)
+                    {
+                        nextArrivalTime = at[i];
+                    }
+                }
+            }
+            currentTime = nextArrivalTime;
+        } else
+        {
+            currentTime += bt[shortestJobIndex];
+            ct[shortestJobIndex] = currentTime;
+            tat[shortestJobIndex] = ct[shortestJobIndex] - at[shortestJobIndex];
+            wt[shortestJobIndex] = tat[shortestJobIndex] - bt[shortestJobIndex];
+            completed[shortestJobIndex] = true;
+            completedCount++;
+        }
     }
 
-    cout << "Arrival Time|Burst Time|Completion Time|Turnaround Time|Waiting Time\n";
+    double total_wt = 0;
+    double total_tat = 0;
 
-    for(int i = 0; i < n; i++)
+    cout << "\nPID\tAT\tBT\tCT\tTAT\tWT\n";
+    cout << setfill('-') << setw(45) << "" << setfill(' ') << endl;
+
+    for (int i = 0; i < n; ++i)
     {
-    cout << ArrivalTime[i] << "\t|\t"
-        << BurstTime[i] << "\t|\t"
-        << CompletionTime[i] << "\t|\t"
-        << TurnAroundTime[i] << "\t|\t"
-        << WaitingTime[i] << "\t|\t"
-        << endl;
+        cout << pid[i] << "\t" << at[i] << "\t" << bt[i] << "\t" << ct[i] << "\t" << tat[i] << "\t" << wt[i] << endl;
+        total_wt += wt[i];
+        total_tat += tat[i];
     }
+
+    cout << "\nAverage Waiting Time: " << total_wt / n << endl;
+    cout << "Average Turnaround Time: " << total_tat / n << endl;
+
     return 0;
 }
