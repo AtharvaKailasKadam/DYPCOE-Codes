@@ -16,5 +16,4 @@ BEGIN
     END LOOP;
     area2:= pi*radius2 * radius2;
     dbms_output.Put_line('Area of 2nd Circle is :=' || area2);
-
 END;
