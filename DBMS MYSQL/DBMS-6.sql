@@ -6,7 +6,7 @@ IF SQLCODE != -942 THEN
 RAISE;
 END IF;
 END;
-/
+
 BEGIN
 EXECUTE IMMEDIATE 'DROP TABLE Stud_Marks';
 EXCEPTION
@@ -52,7 +52,6 @@ END IF;
 INSERT INTO Result (Roll, Name, Class) VALUES (p_Roll, p_Name, v_Class);
 COMMIT;
 END;
-/
 
 BEGIN
 FOR rec IN (SELECT Roll, Name, total_marks FROM Stud_Marks) LOOP
