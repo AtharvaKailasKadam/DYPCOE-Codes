@@ -14,8 +14,14 @@ public class Pass_1_Assembler {
     public static void main(String[] args) {
         init();
         String code[] = {
-            "START 100","LOOP MOV AREG,NUM","ADD AREG,ONE","SUB AREG,TWO",
-            "MOV RESULT,AREG","NUM DS 1","ONE DC 1","TWO DC 2",
+            "START 100",
+            "LOOP MOV AREG,NUM",
+            "ADD AREG,ONE",
+            "SUB AREG,TWO",
+            "MOV RESULT,AREG",
+            "NUM DS 1",
+            "ONE DC 1",
+            "TWO DC 2",
             "RESULT DS 1","END"
         };
         passOne(code);
@@ -29,7 +35,7 @@ public class Pass_1_Assembler {
     static void passOne(String[] p) {
         int LC = 0;
         System.out.println("---- PASS-I ----");
-        
+
         for (String line : p) {
             String parts[] = line.split("\\s+");
             String label = "", op = parts[0], opd = "";
