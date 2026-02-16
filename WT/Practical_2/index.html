@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-body">
+    <header class="page-header">
+        <h1 class="header-title">Welcome to My Awesome Web Page</h1>
+    </header>
+
+    <nav class="navigation-bar">
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#hobbies">Hobbies</a>
+        <a class="nav-link" href="#contact">Contact</a>
+    </nav>
+
+    <main class="main-content">
+        <section id="about" class="content-section">
+            <h2 class="section-title">About Me</h2>
+            <p class="section-paragraph">This is a sample web page created to demonstrate various HTML tags and a background image. Feel free to customize it!</p>
+            <p class="section-paragraph">Here's a div with some content inside:</p>
+            <div class="styled-div">
+                <p>This is a paragraph inside a div. You can style this block independently.</p>
+            </div>
+        </section>
+
+        <section id="hobbies" class="content-section">
+            <h2 class="section-title">My Hobbies</h2>
+            <p class="section-paragraph">Here are some of my hobbies:</p>
+            <ul class="hobbies-list">
+                <li class="hobbies-list-item">Coding and building new things</li>
+                <li class="hobbies-list-item">Exploring new technologies</li>
+                <li class="hobbies-list-item">Reading tech blogs</li>
+            </ul>
+        </section>
+
+        <section id="contact" class="content-section">
+            <h2 class="section-title">Contact Me</h2>
+            <p class="section-paragraph">You can reach out to me via the form below.</p>
+            <form class="contact-form">
+                <label class="form-label" for="name">Name:</label><br>
+                <input class="form-input" type="text" id="name" name="name"><br>
+                <label class="form-label" for="email">Email:</label><br>
+                <input class="form-input" type="email" id="email" name="email"><br><br>
+                <input class="form-submit" type="submit" value="Submit">
+            </form>
+        </section>
+    </main>
+
+    <footer class="page-footer">
+        <p class="footer-text">&copy; 2025 My Web Page. All rights reserved.</p>
+    </footer>
+</body>
+</html>
