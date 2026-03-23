@@ -3,7 +3,7 @@
 <?xml-stylesheet type="text/xsl" href="employees.xsl"?>
 
 <employees xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:noNamespaceSchemaLocation="employees.xsd">
+    xsi:noNamespaceSchemaLocation="employees.xsd">
 
     <employee empID="E101">
         <name>Rahul Sharma</name>
