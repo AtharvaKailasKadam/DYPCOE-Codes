@@ -1,0 +1,7 @@
+<!ELEMENT employees (employee+)>
+<!ELEMENT employee (name, designation, department, salary)>
+<!ATTLIST employee id CDATA #REQUIRED>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT designation (#PCDATA)>
+<!ELEMENT department (#PCDATA)>
+<!ELEMENT salary (#PCDATA)>
