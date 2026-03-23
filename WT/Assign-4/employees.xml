@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-stylesheet type="text/xsl" href="employees.xsl"?>
+
+<employees xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="employees.xsd">
+
+    <employee empID="E101">
+        <name>Rahul Sharma</name>
+        <department>IT</department>
+        <designation>Software Engineer</designation>
+        <salary>60000</salary>
+        <email>rahul@company.com</email>
+        <phone>9876543210</phone>
+    </employee>
+
+    <employee empID="E102">
+        <name>Anita Mehta</name>
+        <department>HR</department>
+        <designation>HR Manager</designation>
+        <salary>75000</salary>
+        <email>anita@company.com</email>
+        <phone>9123456780</phone>
+    </employee>
+
+    <employee empID="E103">
+        <name>Vikram Patel</name>
+        <department>Finance</department>
+        <designation>Accountant</designation>
+        <salary>55000</salary>
+        <email>vikram@company.com</email>
+        <phone>9988776655</phone>
+    </employee>
+
+</employees>
