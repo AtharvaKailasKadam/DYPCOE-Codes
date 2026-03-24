@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -23,3 +24,24 @@
     </xs:element>
 
 </xs:schema>
+=======
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="employees">
+        <xs:complexType>
+        <xs:sequence>
+            <xs:element name="employee" maxOccurs="unbounded">
+            <xs:complexType>
+                <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="designation" type="xs:string"/>
+                <xs:element name="department" type="xs:string"/>
+                <xs:element name="salary" type="xs:integer"/>
+                </xs:sequence>
+                <xs:attribute name="id" type="xs:integer" use="required"/>
+            </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    </xs:schema>
+>>>>>>> 2123fef93627083a20c13ada0e5f791eb68635ee
