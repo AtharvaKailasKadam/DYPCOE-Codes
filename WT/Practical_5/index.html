@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ebook Shop - Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .info-section {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+
+        .info-section h2 {
+            color: #667eea;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .info-section p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #764ba2;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #64388e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
+        }
+
+        .features {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+        }
+
+        .features h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            color: #555;
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .tech-stack {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f2ff;
+            border-radius: 5px;
+            color: #555;
+        }
+
+        .tech-stack h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+
+        .emoji {
+            font-size: 2.5em;
+            display: block;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji">📚</div>
+        <h1>Ebook Shop</h1>
+        <p class="subtitle">Database Display Application</p>
+
+        <div class="info-section">
+            <h2>Welcome! 👋</h2>
+            <p>
+                This is a Java Servlet-based web application that demonstrates database connectivity 
+                using JDBC and dynamic HTML generation. Browse our ebook shop database below.
+            </p>
+        </div>
+
+        <div class="button-group">
+            <a href="/Practical5/ebooks" class="btn btn-primary">📖 View Ebooks</a>
+            <a href="javascript:alert('See documentation files for setup guide');" class="btn btn-secondary">ℹ️ Help</a>
+        </div>
+
+        <div class="features">
+            <h3>✨ Key Features</h3>
+            <ul class="feature-list">
+                <li>Java Servlet-based application</li>
+                <li>MySQL database integration via JDBC</li>
+                <li>Dynamic HTML table generation</li>
+                <li>Professional error handling</li>
+                <li>Styled responsive design</li>
+            </ul>
+        </div>
+
+        <div class="tech-stack">
+            <h4>🛠️ Technology Stack</h4>
+            <div>
+                <span class="tech-badge">Java Servlet</span>
+                <span class="tech-badge">JDBC</span>
+                <span class="tech-badge">MySQL</span>
+                <span class="tech-badge">HTML5</span>
+                <span class="tech-badge">CSS3</span>
+                <span class="tech-badge">Tomcat</span>
+            </div>
+        </div>
+
+        <div class="info-section" style="margin-top: 30px; border-left-color: #764ba2;">
+            <h2>Getting Started</h2>
+            <p>
+                <strong>Access the application:</strong><br>
+                Click the "View Ebooks" button above to see the database contents.
+            </p>
+            <p style="margin-top: 10px;">
+                <strong>Need help?</strong><br>
+                Check the documentation files for setup instructions and troubleshooting.
+            </p>
+        </div>
+
+        <footer>
+            <p>📚 Ebook Shop Application | Practical 5 | Database and Web Development Course</p>
+            <p>Version 1.0 | 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
