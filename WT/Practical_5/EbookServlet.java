@@ -5,11 +5,12 @@ import javax.servlet.http.*;
 
 /**
  * EbookServlet - Displays ebook data from MySQL database in HTML table
- * 
- * Connects to MySQL database 'ebookstore' and retrieves all records from 
+ * This servlet connects to the 'ebookstore' MySQL database, retrieves all records
+ * from the 'ebookshop' table, and displays them in a formatted HTML table.
+ * Connects to MySQL database 'ebookstore' and retrieves all records from
  * 'ebookshop' table, displaying them in a formatted HTML table.
  */
-public class EbookServlet extends HttpServlet {
+public class EbookServlet {
 
     // Database connection parameters
     private static final String DB_URL = "jdbc:mysql://localhost:3306/ebookstore";
