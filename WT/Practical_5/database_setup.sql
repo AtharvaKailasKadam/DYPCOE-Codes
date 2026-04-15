@@ -26,4 +26,3 @@ INSERT INTO ebookshop (book_title, book_author, book_price, quantity) VALUES
 
 
 SELECT * FROM ebookshop;
-
