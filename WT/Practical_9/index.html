@@ -1,0 +1,247 @@
+    <!DOCTYPE html>
+    <html ng-app="authApp">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registration and Login Application</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    </head>
+    <body ng-controller="AuthController">
+        <div class="container">
+            <div class="auth-wrapper">
+                <div class="toggle-buttons">
+                    <button class="toggle-btn" 
+                            ng-click="switchMode('login')" 
+                            ng-class="{active: currentMode === 'login'}">
+                        Login
+                    </button>
+                    <button class="toggle-btn" 
+                            ng-click="switchMode('register')" 
+                            ng-class="{active: currentMode === 'register'}">
+                        Register
+                    </button>
+                </div>
+
+                <div ng-show="currentMode === 'login'" class="form-container">
+                    <h1>Login</h1>
+                    <form name="loginForm" ng-submit="loginUser()" novalidate>
+                        
+                        <div class="form-group">
+                            <label for="loginUsername">Username or Email:</label>
+                            <input type="text" 
+                                id="loginUsername"
+                                name="username" 
+                                ng-model="credentials.username" 
+                                placeholder="Enter your username or email"
+                                required>
+                            <span class="error" ng-show="loginForm.username.$error.required && loginForm.username.$touched">
+                                Username/Email is required
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="loginPassword">Password:</label>
+                            <input type="password"
+                                id="loginPassword"
+                                name="password" 
+                                ng-model="credentials.password" 
+                                placeholder="Enter your password"
+                                required>
+                            <span class="error" ng-show="loginForm.password.$error.required && loginForm.password.$touched">
+                                Password is required
+                            </span>
+                        </div>
+
+                        <div class="message error" ng-show="loginErrorMessage">
+                            {{loginErrorMessage}}
+                        </div>
+                        <div class="message success" ng-show="loginSuccessMessage">
+                            {{loginSuccessMessage}}
+                        </div>
+
+                        <div class="logged-in" ng-show="loggedInUser">
+                            <p class="success">Welcome, <strong>{{loggedInUser}}</strong>!</p>
+                            <button type="button" class="btn logout-btn" ng-click="logoutUser()">
+                                Logout
+                            </button>
+                        </div>
+
+                        <div class="button-group" ng-hide="loggedInUser">
+                            <button type="submit" class="btn submit-btn" ng-disabled="loginForm.$invalid">
+                                Login
+                            </button>
+                            <button type="reset" class="btn reset-btn" ng-click="resetLoginForm()">
+                                Clear
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div ng-show="currentMode === 'register'" class="form-container">
+                    <h1>Register</h1>
+                    <form name="registerForm" ng-submit="registerUser()" novalidate>
+                        
+                        <div class="form-group">
+                            <label for="firstName">First Name:</label>
+                            <input type="text" 
+                                id="firstName"
+                                name="firstName" 
+                                ng-model="user.firstName" 
+                                placeholder="Enter first name"
+                                ng-pattern="/^[a-zA-Z]+$/"
+                                required>
+                            <span class="error" ng-show="registerForm.firstName.$error.required && registerForm.firstName.$touched">
+                                First name is required
+                            </span>
+                            <span class="error" ng-show="registerForm.firstName.$error.pattern && registerForm.firstName.$touched">
+                                First name must contain only letters
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">Last Name:</label>
+                            <input type="text" 
+                                id="lastName"
+                                name="lastName" 
+                                ng-model="user.lastName" 
+                                placeholder="Enter last name"
+                                ng-pattern="/^[a-zA-Z]+$/"
+                                required>
+                            <span class="error" ng-show="registerForm.lastName.$error.required && registerForm.lastName.$touched">
+                                Last name is required
+                            </span>
+                            <span class="error" ng-show="registerForm.lastName.$error.pattern && registerForm.lastName.$touched">
+                                Last name must contain only letters
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regUsername">Username:</label>
+                            <input type="text" 
+                                id="regUsername"
+                                name="regUsername" 
+                                ng-model="user.username" 
+                                placeholder="Choose a username (4-12 characters)"
+                                ng-minlength="4"
+                                ng-maxlength="12"
+                                required>
+                            <span class="error" ng-show="registerForm.regUsername.$error.required && registerForm.regUsername.$touched">
+                                Username is required
+                            </span>
+                            <span class="error" ng-show="registerForm.regUsername.$error.minlength">
+                                Username must be at least 4 characters
+                            </span>
+                            <span class="error" ng-show="registerForm.regUsername.$error.maxlength">
+                                Username cannot exceed 12 characters
+                            </span>
+                            <span class="error" ng-show="usernameExists">
+                                This username is already taken
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" 
+                                id="email"
+                                name="email" 
+                                ng-model="user.email" 
+                                placeholder="Enter your email"
+                                required>
+                            <span class="error" ng-show="registerForm.email.$error.required && registerForm.email.$touched">
+                                Email is required
+                            </span>
+                            <span class="error" ng-show="registerForm.email.$error.email && registerForm.email.$touched">
+                                Please enter a valid email address
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regPassword">Password:</label>
+                            <input type="password" 
+                                id="regPassword"
+                                name="regPassword" 
+                                ng-model="user.password" 
+                                placeholder="Enter password (minimum 6 characters)"
+                                ng-minlength="6"
+                                required>
+                            <span class="error" ng-show="registerForm.regPassword.$error.required && registerForm.regPassword.$touched">
+                                Password is required
+                            </span>
+                            <span class="error" ng-show="registerForm.regPassword.$error.minlength">
+                                Password must be at least 6 characters
+                            </span>
+                            <div class="password-strength" ng-show="user.password">
+                                <span class="strength-label">Password Strength:</span>
+                                <div class="strength-meter">
+                                    <div class="strength-bar" 
+                                        ng-style="{width: getPasswordStrength(user.password) + '%', 'background-color': getPasswordColor(user.password)}">
+                                    </div>
+                                </div>
+                                <span class="strength-text" ng-class="getPasswordStrengthClass(user.password)">
+                                    {{getPasswordStrengthText(user.password)}}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password:</label>
+                            <input type="password" 
+                                id="confirmPassword"
+                                name="confirmPassword" 
+                                ng-model="user.confirmPassword" 
+                                placeholder="Re-enter your password"
+                                required>
+                            <span class="error" ng-show="registerForm.confirmPassword.$error.required && registerForm.confirmPassword.$touched">
+                                Please confirm your password
+                            </span>
+                            <span class="error" ng-show="user.password !== user.confirmPassword && registerForm.confirmPassword.$touched">
+                                Passwords do not match
+                            </span>
+                        </div>
+
+                        <div class="message error" ng-show="registerErrorMessage">
+                            {{registerErrorMessage}}
+                        </div>
+                        <div class="message success" ng-show="registerSuccessMessage">
+                            {{registerSuccessMessage}}
+                        </div>
+
+                        <div class="button-group">
+                            <button type="submit" class="btn submit-btn" ng-disabled="registerForm.$invalid || user.password !== user.confirmPassword">
+                                Register
+                            </button>
+                            <button type="reset" class="btn reset-btn" ng-click="resetRegisterForm()">
+                                Clear
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div ng-show="registeredUsers.length > 0" class="user-list">
+                    <h3>Registered Users</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="registeredUser in registeredUsers">
+                                <td>{{registeredUser.username}}</td>
+                                <td>{{registeredUser.firstName}}</td>
+                                <td>{{registeredUser.lastName}}</td>
+                                <td>{{registeredUser.email}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+    </html>
