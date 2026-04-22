@@ -7,7 +7,7 @@ def helpdesk_expert_system():
     login_problem = input("Are you unable to login? ").lower() == "yes"
     printer_issue = input("Is the printer not working? ").lower() == "yes"
 
-    print("\n--- Solution सुझाव ---")
+    print("\n--- Solution Summary ---")
 
     found = False
 
