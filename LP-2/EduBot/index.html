@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EduBot - AI-powered educational chatbot for students">
+    <title>EduBot — AI Study Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="brand">
+                <div class="brand-icon">&#129302;</div>
+                <span class="brand-name">EduBot</span>
+            </div>
+            <button class="new-chat-btn" id="newChatBtn" title="New Chat">+</button>
+        </div>
+        <div class="sidebar-section-label">Recent Chats</div>
+        <ul class="chat-history-list" id="chatHistoryList"></ul>
+        <div class="sidebar-footer">
+            <div class="api-status" id="apiStatus">
+                <span class="status-dot offline"></span>
+                <span class="status-text">AI Offline</span>
+            </div>
+            <button class="settings-btn" id="settingsBtn">&#9881; Settings</button>
+        </div>
+    </aside>
+
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>API Settings</h2>
+                <button class="modal-close" id="closeSettings">&times;</button>
+            </div>
+            <div class="modal-body">
+                <label for="apiKeyInput">Gemini API Key</label>
+                <p class="hint">Get a free key at <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a></p>
+                <input type="password" id="apiKeyInput" placeholder="Paste your API key here…">
+                <button class="save-key-btn" id="saveKeyBtn">Save &amp; Connect</button>
+                <p class="key-note">Your key is stored only in your browser's local storage.</p>
+            </div>
+        </div>
+    </div>
+
+    <header class="mobile-topbar" id="mobileTopbar">
+        <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
+        <div class="brand brand-mobile">
+            <div class="brand-icon small">&#129302;</div>
+            <span class="brand-name">EduBot</span>
+        </div>
+    </header>
+
+    <main class="chat-main" id="chatMain">
+        <div class="welcome-screen" id="welcomeScreen">
+            <div class="welcome-icon">&#129302;</div>
+            <h1>Hello! I'm <span class="highlight">EduBot</span></h1>
+            <p class="welcome-sub">Your AI study assistant. Ask me anything about academics, homework, exams, or general knowledge.</p>
+            <div class="suggestion-chips">
+                <button class="chip" data-msg="Explain photosynthesis in simple terms">🌱 Explain photosynthesis</button>
+                <button class="chip" data-msg="Give me 5 study tips for exams">📚 Study tips for exams</button>
+                <button class="chip" data-msg="What is Newton's second law of motion?">🔬 Newton's 2nd law</button>
+                <button class="chip" data-msg="Help me write an essay outline">✍️ Essay outline help</button>
+            </div>
+        </div>
+        <div class="messages-container" id="messagesContainer"></div>
+        <div class="typing-indicator" id="typingIndicator">
+            <div class="typing-dots"><span></span><span></span><span></span></div>
+            <span class="typing-text">EduBot is thinking…</span>
+        </div>
+        <div class="input-area" id="inputArea">
+            <div class="input-wrapper">
+                <textarea id="userInput" placeholder="Ask EduBot anything…" rows="1" maxlength="2000"></textarea>
+                <button class="clear-btn" id="clearBtn" title="Clear chat">&#128465;</button>
+                <button class="send-btn" id="sendBtn" title="Send message" disabled>&#10148;</button>
+            </div>
+            <p class="input-hint">EduBot can make mistakes. Verify important information.</p>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
