@@ -1,0 +1,19 @@
+Student ID,Name,Gender,Math Marks,Science Marks,English Marks,Attendance,Final Grade
+S001,Aarav,M,78,85,82,92,A
+S002,Diya,F,88,91,87,95,A
+S003,Rohan,M,45,52,49,60,C
+S004,Anaya,F,92,95,94,98,A+
+S005,Virat,M,15,22,18,40,F
+S006,Meera,F,67,73,70,85,B
+S007,Arjun,M,120,118,115,105,A+
+S008,Kavya,F,81,,79,90,B+
+S009,Rahul,M,56,61,58,75,B
+S010,Pooja,F,34,29,31,55,D
+S011,Neha,F,89,93,90,,A
+S012,Karan,M,0,5,2,30,F
+S013,Ishaan,M,72,68,70,88,B+
+S014,Simran,F,95,97,96,99,A+
+S015,Amit,M,150,140,145,110,A+
+S016,Riya,F,64,59,62,-10,C
+S017,Dev,M,83,78,80,92,B+
+S018,Tanvi,F,,88,91,94,A
