@@ -1,0 +1,74 @@
+# ================================
+# Practical 1 - DSBDA (Complete Code)
+# ================================
+
+import pandas as pd
+import numpy as np
+
+# Load dataset
+df = pd.read_csv('netflix_titles.csv')
+
+# -------------------------------
+# Display Data
+# -------------------------------
+print("\n--- First 5 Rows ---")
+print(df.head())
+
+print("\n--- Last 5 Rows ---")
+print(df.tail())
+
+print("\n--- Top 10 Rows ---")
+print(df.head(10))
+
+print("\n--- Random Sample (10 Rows) ---")
+print(df.sample(10))
+
+# -------------------------------
+# Dataset Information
+# -------------------------------
+print("\n--- Shape of Dataset ---")
+print(df.shape)
+
+print("\n--- Number of Rows and Columns ---")
+print("Rows:", df.shape[0])
+print("Columns:", df.shape[1])
+
+print("\n--- Data Types ---")
+print(df.dtypes)
+
+print("\n--- Dataset Info ---")
+print(df.info())
+
+# -------------------------------
+# Statistical Summary
+# -------------------------------
+print("\n--- Descriptive Statistics ---")
+print(df.describe())
+
+# -------------------------------
+# Missing Values
+# -------------------------------
+print("\n--- Missing Values per Column ---")
+print(df.isnull().sum())
+
+print("\n--- Total Missing Values ---")
+print(df.isnull().sum().sum())
+
+# -------------------------------
+# Convert Columns to Category
+# -------------------------------
+cat_columns = ['type', 'country', 'rating']
+
+for col in cat_columns:
+    if col in df.columns:
+        df[col] = df[col].astype('category')
+
+print("\n--- Updated Data Types ---")
+print(df.dtypes)
+
+# -------------------------------
+# Value Counts Example
+# -------------------------------
+if 'rating' in df.columns:
+    print("\n--- Value Counts (Rating) ---")
+    print(df['rating'].value_counts())

@@ -1,0 +1,84 @@
+# ==========================================
+# DATA ANALYTICS III
+# Naive Bayes on iris.csv + Evaluation
+# ==========================================
+
+# 1. Import Libraries
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import confusion_matrix
+
+# 2. Load Dataset
+df = pd.read_csv("iris.csv")
+
+print("\n--- First 5 Rows ---")
+print(df.head())
+
+# 3. Prepare Data
+# Features (all columns except last)
+X = df.iloc[:, :-1]
+
+# Target (last column)
+y = df.iloc[:, -1]
+
+# 4. Split Data (Train/Test)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# 5. Train Naive Bayes Model
+model = GaussianNB()
+model.fit(X_train, y_train)
+
+# 6. Predictions
+y_pred = model.predict(X_test)
+
+# 7. Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+
+print("\n--- Confusion Matrix ---")
+print(cm)
+
+# ==========================================
+# 8. Compute Metrics (Manual Calculation)
+# ==========================================
+
+# For multi-class, compute overall accuracy first
+total = np.sum(cm)
+correct = np.trace(cm)
+
+accuracy = correct / total
+error_rate = 1 - accuracy
+
+print("\n--- Overall Metrics ---")
+print("Accuracy:", accuracy)
+print("Error Rate:", error_rate)
+
+# ==========================================
+# 9. Compute TP, FP, TN, FN for each class
+# ==========================================
+
+print("\n--- Class-wise Metrics ---")
+
+for i in range(len(cm)):
+    TP = cm[i][i]
+    FN = np.sum(cm[i, :]) - TP
+    FP = np.sum(cm[:, i]) - TP
+    TN = total - (TP + FP + FN)
+    
+    precision = TP / (TP + FP) if (TP + FP) != 0 else 0
+    recall = TP / (TP + FN) if (TP + FN) != 0 else 0
+    
+    print(f"\nClass {i}:")
+    print("TP:", TP)
+    print("FP:", FP)
+    print("TN:", TN)
+    print("FN:", FN)
+    print("Precision:", precision)
+    print("Recall:", recall)
+
+# ==========================================
+# End
+# ==========================================

@@ -1,0 +1,98 @@
+import os
+os.getcwd()
+
+import pandas as pd
+
+df = pd.read_csv('student2.csv')
+
+df
+df.shape
+df.head()
+df.tail()
+
+df.count()
+df.info()
+
+df.isnull()
+df.isnull().sum()
+
+print(True + True)
+
+# Drop rows with missing values
+df.dropna()
+
+# Fill missing values with 0
+df.fillna(0)
+
+# Fill missing values in 'class'
+df['class'].fillna('TE')
+
+# Fill missing values in 'marks' using mean
+df['marks'].fillna(df['marks'].mean())
+
+# Fill missing values in 'age' using median
+df['age'].fillna(df['age'].median())
+
+# Value counts
+df['class'].value_counts()
+
+# Fill missing using mode
+df['class'].fillna(df['class'].mode()[0])
+
+# Backfill method
+df.fillna(method='backfill')
+
+# Forward fill (pad)
+df.fillna(method='pad')
+
+# Describe dataset
+df.describe()
+
+# ------------------------------------------
+# Outlier Detection
+# ------------------------------------------
+
+import numpy as np
+
+x = np.array([5,4,3,2,7,8,98,28])
+
+np.mean(x)
+np.median(x)
+
+# Boxplot
+import matplotlib.pyplot as plt
+plt.boxplot(x)
+
+df.plot.box()
+
+# Modify outlier value
+df.loc[6,'marks']
+df.loc[6,'marks'] = 98.45
+
+df.plot.box()
+
+# Histogram
+df.plot.hist()
+df['age'].plot.hist()
+
+# ------------------------------------------
+# Scaling / Transformation
+# ------------------------------------------
+
+x = df[['age','marks']]
+
+x.describe()
+
+from sklearn.preprocessing import MinMaxScaler
+
+scaler = MinMaxScaler()
+x_scaled = scaler.fit_transform(x)
+
+pd.DataFrame(x_scaled).describe()
+
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+x_scaled = scaler.fit_transform(x)
+
+pd.DataFrame(x_scaled).describe()
