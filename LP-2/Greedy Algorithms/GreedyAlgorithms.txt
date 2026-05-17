@@ -1,0 +1,264 @@
+ Implement Greedy search algorithm for any of the following application: 
+I. Selection Sort 
+II. Minimum Spanning Tree 
+III. Single-Source Shortest Path Problem 
+IV. Job Scheduling Problem 
+V. Prim's Minimal Spanning Tree Algorithm 
+VI. Kruskal's Minimal Spanning Tree Algorithm 
+VII. Dijkstra's Minimal Spanning Tree Algorithm
+
+
+import java.util.*;
+
+// ===============================================
+// GREEDY ALGORITHMS PRACTICAL FILE
+// ===============================================
+public class GreedyAlgorithms {
+
+    // ==========================================================
+    // I. SELECTION SORT (Greedy Approach)
+    // ==========================================================
+    public static void selectionSort(int arr[]) {
+        int n = arr.length;
+
+        for (int i = 0; i < n - 1; i++) {
+            int minIndex = i;
+
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+
+            // Swap
+            int temp = arr[minIndex];
+            arr[minIndex] = arr[i];
+            arr[i] = temp;
+        }
+
+        System.out.println("Selection Sort Result:");
+        System.out.println(Arrays.toString(arr));
+    }
+
+    // ==========================================================
+    // II. MINIMUM SPANNING TREE (Using Kruskal's Concept)
+    // ==========================================================
+    static class Edge implements Comparable<Edge> {
+        int src, dest, weight;
+
+        public int compareTo(Edge other) {
+            return this.weight - other.weight;
+        }
+    }
+
+    static class Subset {
+        int parent, rank;
+    }
+
+    static int find(Subset subsets[], int i) {
+        if (subsets[i].parent != i)
+            subsets[i].parent = find(subsets, subsets[i].parent);
+        return subsets[i].parent;
+    }
+
+    static void union(Subset subsets[], int x, int y) {
+        int rootX = find(subsets, x);
+        int rootY = find(subsets, y);
+
+        if (subsets[rootX].rank < subsets[rootY].rank)
+            subsets[rootX].parent = rootY;
+        else if (subsets[rootX].rank > subsets[rootY].rank)
+            subsets[rootY].parent = rootX;
+        else {
+            subsets[rootY].parent = rootX;
+            subsets[rootX].rank++;
+        }
+    }
+
+    // ==========================================================
+    // III. SINGLE SOURCE SHORTEST PATH (Dijkstra)
+    // ==========================================================
+    public static void dijkstra(int graph[][], int src) {
+        int V = graph.length;
+        int dist[] = new int[V];
+        boolean visited[] = new boolean[V];
+
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        dist[src] = 0;
+
+        for (int count = 0; count < V - 1; count++) {
+            int u = minDistance(dist, visited);
+            visited[u] = true;
+
+            for (int v = 0; v < V; v++) {
+                if (!visited[v] && graph[u][v] != 0 &&
+                        dist[u] != Integer.MAX_VALUE &&
+                        dist[u] + graph[u][v] < dist[v]) {
+
+                    dist[v] = dist[u] + graph[u][v];
+                }
+            }
+        }
+
+        System.out.println("Dijkstra Shortest Path:");
+        for (int i = 0; i < V; i++) {
+            System.out.println("Node " + i + " Distance: " + dist[i]);
+        }
+    }
+
+    static int minDistance(int dist[], boolean visited[]) {
+        int min = Integer.MAX_VALUE, index = -1;
+
+        for (int i = 0; i < dist.length; i++) {
+            if (!visited[i] && dist[i] < min) {
+                min = dist[i];
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    // ==========================================================
+    // IV. JOB SCHEDULING PROBLEM
+    // ==========================================================
+    static class Job {
+        char id;
+        int deadline, profit;
+
+        Job(char id, int deadline, int profit) {
+            this.id = id;
+            this.deadline = deadline;
+            this.profit = profit;
+        }
+    }
+
+    public static void jobScheduling(Job jobs[]) {
+        Arrays.sort(jobs, (a, b) -> b.profit - a.profit);
+
+        int n = jobs.length;
+        boolean slots[] = new boolean[n];
+        char result[] = new char[n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = Math.min(n, jobs[i].deadline) - 1; j >= 0; j--) {
+                if (!slots[j]) {
+                    slots[j] = true;
+                    result[j] = jobs[i].id;
+                    break;
+                }
+            }
+        }
+
+        System.out.println("Job Scheduling Result:");
+        for (char c : result) {
+            if (c != '\0')
+                System.out.print(c + " ");
+        }
+        System.out.println();
+    }
+
+    // ==========================================================
+    // V. PRIM'S MINIMUM SPANNING TREE
+    // ==========================================================
+    public static void primMST(int graph[][]) {
+        int V = graph.length;
+        int parent[] = new int[V];
+        int key[] = new int[V];
+        boolean mstSet[] = new boolean[V];
+
+        Arrays.fill(key, Integer.MAX_VALUE);
+        key[0] = 0;
+        parent[0] = -1;
+
+        for (int count = 0; count < V - 1; count++) {
+            int u = minDistance(key, mstSet);
+            mstSet[u] = true;
+
+            for (int v = 0; v < V; v++) {
+                if (graph[u][v] != 0 && !mstSet[v] && graph[u][v] < key[v]) {
+                    parent[v] = u;
+                    key[v] = graph[u][v];
+                }
+            }
+        }
+
+        System.out.println("Prim's MST:");
+        for (int i = 1; i < V; i++) {
+            System.out.println(parent[i] + " - " + i + " : " + graph[i][parent[i]]);
+        }
+    }
+
+    // ==========================================================
+    // VI. KRUSKAL'S MINIMUM SPANNING TREE
+    // ==========================================================
+    public static void kruskalMST(Edge edges[], int V) {
+        Arrays.sort(edges);
+
+        Subset subsets[] = new Subset[V];
+        for (int i = 0; i < V; i++) {
+            subsets[i] = new Subset();
+            subsets[i].parent = i;
+            subsets[i].rank = 0;
+        }
+
+        System.out.println("Kruskal's MST:");
+        for (Edge edge : edges) {
+            int x = find(subsets, edge.src);
+            int y = find(subsets, edge.dest);
+
+            if (x != y) {
+                System.out.println(edge.src + " - " + edge.dest + " : " + edge.weight);
+                union(subsets, x, y);
+            }
+        }
+    }
+
+    // ==========================================================
+    // VII. DIJKSTRA (Already Covered in III)
+    // ==========================================================
+
+    // ==========================================================
+    // MAIN METHOD (DRIVER CODE)
+    // ==========================================================
+    public static void main(String[] args) {
+
+        // Selection Sort
+        int arr[] = {64, 25, 12, 22, 11};
+        selectionSort(arr);
+
+        // Dijkstra Graph
+        int graph[][] = {
+                {0, 2, 4, 0, 0},
+                {2, 0, 1, 7, 0},
+                {4, 1, 0, 3, 5},
+                {0, 7, 3, 0, 2},
+                {0, 0, 5, 2, 0}
+        };
+        dijkstra(graph, 0);
+
+        // Job Scheduling
+        Job jobs[] = {
+                new Job('A', 2, 100),
+                new Job('B', 1, 19),
+                new Job('C', 2, 27),
+                new Job('D', 1, 25),
+                new Job('E', 3, 15)
+        };
+        jobScheduling(jobs);
+
+        // Prim's MST
+        primMST(graph);
+
+        // Kruskal's MST
+        Edge edges[] = new Edge[5];
+        for (int i = 0; i < 5; i++) edges[i] = new Edge();
+
+        edges[0].src = 0; edges[0].dest = 1; edges[0].weight = 2;
+        edges[1].src = 0; edges[1].dest = 2; edges[1].weight = 4;
+        edges[2].src = 1; edges[2].dest = 2; edges[2].weight = 1;
+        edges[3].src = 2; edges[3].dest = 3; edges[3].weight = 3;
+        edges[4].src = 3; edges[4].dest = 4; edges[4].weight = 2;
+
+        kruskalMST(edges, 5);
+    }
+}
