@@ -1,0 +1,84 @@
+🔷 Creating & Running a Salesforce Apex Application (Step-by-Step Execution)
+Q. How to execute a Salesforce Apex application practically?
+✅ Step 1: Create Salesforce Account
+Go to: https://developer.salesforce.com
+Click Sign Up (Developer Edition)
+Fill details and verify email
+Login to your account
+✅ Step 2: Open Setup
+Click ⚙️ (Gear Icon) on top right
+Click Setup
+✅ Step 3: Create Custom Object
+In Setup search → Object Manager
+Click → Create → Custom Object
+Fill:
+Label: Student
+Object Name: Student
+Click Save
+✅ Step 4: Add Fields to Object
+Open your object → Fields & Relationships
+Click New
+Add fields like:
+Name (Text)
+Age (Number)
+Email (Email)
+Save all fields
+✅ Step 5: Create Records (Data)
+Go to App Launcher (9 dots)
+Open your object (Student)
+Click New
+Enter sample data
+Save
+✅ Step 6: Open Developer Console
+Click profile icon (top right)
+Click Developer Console
+✅ Step 7: Create Apex Class
+File → New → Apex Class
+Name: StudentController
+Example Code:
+public class StudentController {
+    public static List<Student__c> getStudents() {
+        return [SELECT Name, Age__c, Email__c FROM Student__c];
+    }
+}
+Click Save
+✅ Step 8: Run Apex Code
+In Developer Console → Debug → Open Execute Anonymous Window
+Run this:
+List<Student__c> sList = StudentController.getStudents();
+System.debug(sList);
+Click Execute
+✅ Step 9: Check Output
+Go to Logs tab
+Open latest log
+Search for DEBUG
+You’ll see student records printed
+✅ Step 10: Create Apex Trigger (Optional but Important for Viva)
+File → New → Apex Trigger
+Example:
+trigger StudentTrigger on Student__c (before insert) {
+    for(Student__c s : Trigger.new) {
+        s.Name = s.Name + ' Verified';
+    }
+}
+Save it
+✅ Step 11: Test Trigger
+Add new Student record
+Check if name changes automatically
+✅ Step 12: Create Test Class (IMPORTANT for Viva)
+File → New → Apex Class
+@isTest
+public class StudentTest {
+    @isTest static void testStudent() {
+        Student__c s = new Student__c(Name='Test', Age__c=20);
+        insert s;
+        
+        List<Student__c> listS = StudentController.getStudents();
+        System.assert(listS.size() > 0);
+    }
+}
+Run test → Check coverage
+✅ Step 13: Run Test
+Click Test → New Run
+Select class → Run
+Check results

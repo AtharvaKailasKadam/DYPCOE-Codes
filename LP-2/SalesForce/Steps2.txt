@@ -1,0 +1,101 @@
+🔷 Practical 4: Custom Application in Salesforce (REAL WEBSITE STEPS)
+🔷 Step 1: Login
+Open browser
+Go to Salesforce Developer login
+Enter username & password
+Click Login
+🔷 Step 2: Open Setup
+Click ⚙️ (top-right corner)
+Click Setup
+🔷 Step 3: Create Object (Student)
+In left search → type Object Manager
+Click Object Manager
+Click Create → Custom Object
+Fill:
+Label → Student
+Plural → Students
+Click Save
+🔷 Step 4: Create Fields
+Inside Student object
+Click Fields & Relationships
+Click New
+
+👉 Add fields one by one:
+
+Age Field:
+Select → Number
+Label → Age
+Click Next → Save
+Email Field:
+Select → Email
+Label → Email
+Click Next → Save
+Course Field:
+Select → Text
+Label → Course
+Click Next → Save
+🔷 Step 5: Create Tab (VERY IMPORTANT)
+In Setup search → type Tabs
+Click Tabs
+Under Custom Object Tabs → Click New
+Select Student
+Choose any tab style
+Click Next → Next → Save
+🔷 Step 6: Create App
+Go to App Manager
+Click New Lightning App
+
+👉 Fill:
+
+App Name → Student App
+Click Next → Next → Next
+🔷 Step 7: Add Student to App
+
+👉 IMPORTANT SCREEN:
+
+In Navigation Items
+Find Student (left side)
+Click → Add (→)
+Move to right side
+Click Next → Save
+🔷 Step 8: Open App
+Click App Launcher (9 dots)
+Search → Student App
+Open it
+🔷 Step 9: Add Data
+Click Student tab
+Click New
+Enter:
+Name → Atharva
+Age → 21
+Email → abc@gmail.com
+Course → IT
+Click Save
+🔷 Step 10: Create Report
+Click App Launcher
+Search → Reports
+Click New Report
+Select Student
+Click Run → Save
+🔷 Step 11: Create Dashboard
+Go to Dashboards
+Click New Dashboard
+Add Report
+Add Chart
+Save
+🔷 Step 12: Apply Validation Rule
+Go to Object Manager → Student
+Click Validation Rules
+Click New
+
+👉 Example:
+
+Rule Name → Age_Check
+Formula → Age__c < 0
+Error → Age cannot be negative
+Click Save
+🔷 Step 13: Test Application
+Add new record
+Try wrong age → check error
+View reports
+Check dashboard
